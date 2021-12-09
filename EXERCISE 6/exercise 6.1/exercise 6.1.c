@@ -10,6 +10,12 @@ int main()
 	printf("Enter amount of desired numbers: ");
 	scanf("%d", &n);
 
+	if (n < 0)
+	{
+		printf("ERROR: negative number\nEnter amount of desired numbers: ");
+		scanf("%d", &n);
+	}
+
 	for (int i = 0; i < n; i++)
 	{
 		printf("Enter a number: ");

@@ -1,20 +1,32 @@
-// EXERCIEES 4.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include <stdio.h>  
+#include <string.h>  
 
-#include <iostream>
+// function definition of the revstr()  
+void revstr(char* str1)
+{
+    // declare variable  
+    int i, len, temp;
+    len = strlen(str1); // use strlen() to get the length of str string  
+
+    // use for loop to iterate the string   
+    for (i = 0; i < len / 2; i++)
+    {
+        // temp variable use to temporary hold the string  
+        temp = str1[i];
+        str1[i] = str1[len - i - 1];
+        str1[len - i - 1] = temp;
+    }
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    char str[50]; // size of char string  
+    printf(" Enter the string: ");
+    gets(str); // use gets() function to take string  
+
+    printf(" \n Before reversing the string: %s \n", str);
+
+    // call revstr() function   
+    revstr(str);
+    printf(" After reversing the string: %s", str);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

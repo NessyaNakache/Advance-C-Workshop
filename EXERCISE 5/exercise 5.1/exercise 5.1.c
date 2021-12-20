@@ -12,30 +12,25 @@ struct Dog {
 	int weight;
 };
 
-//void sortByNames(struct Dog* dogs, int count)
-//{
-//	char temp[20];
-//
-//	for (int i = 0; i < count; i++) {
-//		for (int j = i + 1; j < count; j++) {
-//			if (strcmp(dogs[i].name, dogs[j].name) > 0) {
-//				strcpy(temp, dogs[i].name);
-//				strcpy(dogs[i].name, temp);
-//				strcpy(dogs[j].name, temp);
-//			}
-//		}
-//	}
-//
-//	for (int i = 0; i < 5; i++)
-//	{
-//		printf("%s\n", dogs[i].name);
-//	}
-//
-//}
+//print info of dog
+void printDog(struct Dog dog)
+{
+	printf("%s\t%s(", dog.name, dog.race);
+	printf("%s)\t%d yrs\t%dkg\n\n", dog.gender ? "F" : "M", dog.age, dog.weight);
+}
 
+//print all dogs contained in pound
+void printPound(struct Dog dogs[], int count)
+{
+	for (int i = 0; i < count; ++i)
+		printDog(dogs[i]);
+}
+
+//sort dogs according to weights in ascending order
 void sortWeight(struct Dog dogs[], int count)
 {
-	int temp, i, j, k;
+	int i, j, k;
+	struct Dog temp;
 
 	for (j = 0; j < count; ++j)
 	{
@@ -43,39 +38,33 @@ void sortWeight(struct Dog dogs[], int count)
 		{
 			if (dogs[j].weight > dogs[k].weight)
 			{
-				temp = dogs[j].weight;
-				dogs[j].weight = dogs[k].weight;
-				dogs[k].weight = temp;
+				temp = dogs[j];
+				dogs[j] = dogs[k];
+				dogs[k] = temp;
 			}
 		}
 	}
 
-	printf("Dogs sorted according to weight:\n");
-	for (i = 0; i < count; ++i)
-		printf("%d\n", dogs[i].weight);
+	
 }
 
-
+//sort dogs according to names in ascending order
 void sortNames(struct Dog dogs[], int count)
 {
-	int i, j, k;
-	char* temp = ' ';
+	int j, k;
+	struct Dog temp;
 	
 	for (j = 0; j < count; ++j)
 	{
 		for (k = j + 1; k < count; ++k)
 		{
 			if (strcmp(dogs[j].name, dogs[k].name) > 0) {
-				temp = dogs[j].name;
-				dogs[j].name = dogs[k].name;
-				dogs[k].name = temp;
+				temp = dogs[j];
+				dogs[j] = dogs[k];
+				dogs[k] = temp;
 			}
 		}
 	}
-
-	printf("Dogs sorted according to names:\n");
-	for (i = 0; i < count; ++i)
-		printf("%s\n", dogs[i].name);
 }
 
 int main()
@@ -87,7 +76,7 @@ int main()
 	dog1.race = "chihuahua";
 	dog1.gender = MALE;
 	dog1.age = 4;
-	dog1.weight = 2.3;
+	dog1.weight = 2;
 
 	/*dog 2 specification*/
 	dog2.name = "Jerry";
@@ -117,10 +106,20 @@ int main()
 	dog5.age = 7;
 	dog5.weight = 50;
 
-	struct Dog arrDogs[5] = { dog1,dog2,dog3,dog4,dog5 };
+	//create array to regroup all dogs
+	struct Dog pound[5] = { dog1,dog2,dog3,dog4,dog5 };
 
-	sortWeight(arrDogs, 5);
-	sortNames(arrDogs, 5);
+	//sort dogs by weight then print
+	sortWeight(pound, 5);
+	printf("Dogs sorted according to their weight:\n");
+	printPound(pound, 5);
 
+	printf("\n\n\n");
+
+	//sort dogs by name then print
+	sortNames(pound, 5);
+	printf("Dogs sorted according to their name:\n");
+	printPound(pound, 5);
+	
 	return 0;
 }

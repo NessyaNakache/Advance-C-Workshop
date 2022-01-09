@@ -57,27 +57,27 @@ int CalculateNextPrime(int num)
 /**
 * @ input is the user's input, can simply be enter key
 * @ Size is the dynamic size of PrimeArray
-* @ PrimeArray is a dynamic array whose first element is initialized to 2, first prime number
+* @ PrimeArray is a dynamic array whose first element is initialized to 1
 */
 void GetNextPrime()
 {
     char input;
     int Size = 1;
     int* PrimeArray = (int*)malloc(Size * sizeof(int));
-    *PrimeArray = 2;
-
-    printf("%d ", *(PrimeArray + (Size - 1)));
+    *PrimeArray = 1;
+    
+    printf("Enter 0 to exit program\n\n\n");
 
 
     do    
     {
-        scanf("%c", &input);
 
         ++Size;
         PrimeArray = (int*)realloc(PrimeArray, Size * sizeof(int)); //dynamic reallocation
         *(PrimeArray + (Size - 1)) = CalculateNextPrime(*(PrimeArray + (Size - 2))); //last element is next prime number
-        printf("%d ", *(PrimeArray + (Size - 1)));
+        printf("%d\n", *(PrimeArray + (Size - 1)));
 
+        scanf("%c", &input);
 
     } while (!isdigit(input));
 }

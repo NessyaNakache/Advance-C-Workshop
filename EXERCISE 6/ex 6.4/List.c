@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#include"List.h"
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -7,7 +7,7 @@ typedef struct Node_t Node;
 typedef struct List_t List;
 
 
-struct Node_t{
+struct Node_t {
 	ListDataType data;
 	Node* next;
 };
@@ -22,8 +22,8 @@ List* CreateList()
 {
 	List* list;
 	list->head = NULL;
-	
-	
+
+
 
 	return list;
 }
@@ -158,7 +158,7 @@ void DeleteListNode(List* list, Node* target)
 	Node* temp = list->head, * prev;
 
 	// If head node itself holds the key to be deleted
-	if (temp != NULL && temp->data == target->data && temp->next==target->next) {
+	if (temp != NULL && temp->data == target->data && temp->next == target->next) {
 		list->head = temp->next; // Changed head
 		free(temp); // free old head
 		return prev;
@@ -166,7 +166,7 @@ void DeleteListNode(List* list, Node* target)
 
 	// Search for the key to be deleted, keep track of the
 	// previous node as we need to change 'prev->next'
-	while (temp != NULL && (temp->data != target->data || temp->next!=target->next)) {
+	while (temp != NULL && (temp->data != target->data || temp->next != target->next)) {
 		prev = temp;
 		temp = temp->next;
 	}
@@ -208,7 +208,7 @@ Node* DeleteListValue(List* list, ListDataType value)
 	prev->next = temp->next;
 
 	free(temp); // Free memory
-} 
+}
 
 Node* FindInList(List* list, ListDataType value)
 {
